@@ -1,0 +1,7 @@
+role OCE_Manager
+	modelPermission: read
+
+	tablePermission 'sales_sample_data xlsx' = [Region] == "Oceania"
+
+	annotation PBI_Id = ada192214ee542069fa08bec19165e84
+

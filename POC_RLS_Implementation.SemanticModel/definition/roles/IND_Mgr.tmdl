@@ -1,0 +1,7 @@
+role IND_Mgr
+	modelPermission: read
+
+	tablePermission 'sales_sample_data xlsx' = [Country] == "India"
+
+	annotation PBI_Id = 5113a9305ae646839eeb3ce5f425d322
+

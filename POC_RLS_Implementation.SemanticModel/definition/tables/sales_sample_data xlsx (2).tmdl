@@ -1,0 +1,164 @@
+table 'sales_sample_data xlsx (2)'
+	lineageTag: 6f5f1671-1dae-45f8-9d9d-24aec36c7094
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: eb9dffe6-a0a9-4d0e-b149-6958c81bfb21
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e98b6e5a-6357-4286-ae1a-7f7bd6579a3e
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		variation Variation
+			isDefault
+			relationship: 4671fdd8-e499-45c2-b9a8-beffc05760fd
+			defaultHierarchy: LocalDateTable_9c034741-17dd-476a-9778-22ccde9cf3f0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 348502cb-8315-4486-a59f-4e05862d3c6a
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: daba2dee-64e6-4865-92b0-f1252f4624a3
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: f94dea15-7a4f-4ec1-875f-ef6fb5e5413e
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 0071ae8a-aaf8-489f-8443-a596cd0ca49f
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: d5012130-570a-4162-b14a-42ba4a17db69
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: 9123a96d-470a-473e-be41-34d6da7ac566
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Subcategory'
+		dataType: string
+		lineageTag: 99812608-6561-4508-aa40-90357da3d780
+		summarizeBy: none
+		sourceColumn: Product Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: 74dcb4a8-29b4-40c3-b078-4a0bffbdcd47
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantity Sold'
+		dataType: int64
+		formatString: 0
+		lineageTag: d37fb634-80cb-43e9-9e61-c2a846809966
+		summarizeBy: sum
+		sourceColumn: Quantity Sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price per Unit'
+		dataType: double
+		lineageTag: c3feaae4-5ea2-488e-9404-43a4e86483fd
+		summarizeBy: sum
+		sourceColumn: Price per Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Discount _%_'
+		dataType: double
+		lineageTag: 058b8bf2-149f-46f2-87bd-e4196c62eb64
+		summarizeBy: sum
+		sourceColumn: Discount _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales Amount'
+		dataType: double
+		lineageTag: efe14c1b-8c1e-4ae3-bf5a-9e6491590bf0
+		summarizeBy: sum
+		sourceColumn: Sales Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 5a451c26-802a-44f3-a182-40f4dc1a687e
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Profit Margin _%_'
+		dataType: double
+		lineageTag: 5257b4f8-47ca-4267-ad41-f6023c305ad9
+		summarizeBy: sum
+		sourceColumn: Profit Margin _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'sales_sample_data xlsx (2)' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("a2cuqgr5ukpeppo5hafacatsom-rsoehckle2yefc52b45p5no3ma.datawarehouse.fabric.microsoft.com", "demo_lakehouse"),
+				    #"dbo_sales_sample_data xlsx" = Source{[Schema="dbo",Item="sales_sample_data xlsx"]}[Data]
+				in
+				    #"dbo_sales_sample_data xlsx"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

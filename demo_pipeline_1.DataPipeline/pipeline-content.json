@@ -1,0 +1,59 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "get_data_from_src",
+        "type": "RefreshDataflow",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "b472cc64-ad39-4b47-ad3a-0b2fa3b73769",
+          "workspaceId": "89439c8c-264b-42b0-8bba-0f3afeb5db60",
+          "notifyOption": "NoNotification",
+          "dataflowType": "Dataflow-Gen2"
+        }
+      },
+      {
+        "name": "send_mail_on_fail",
+        "description": "this activity is for fail task mail.",
+        "type": "Office365Outlook",
+        "dependsOn": [
+          {
+            "activity": "get_data_from_src",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "To": "xyz@gmail.com",
+              "Subject": "pipeline fail",
+              "Body": "<p>pipeline fail</p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            }
+          }
+        }
+      }
+    ],
+    "logicAppsConnectionPayload": {
+      "id": "/subscriptions/34957e2d-ab51-4d0b-8932-7f04baff724f/resourceGroups/connections-89439c8c-264b-42b0-8bba-0f3afeb5db60/providers/Microsoft.Web/connections/1_103663a5-3138-4e7c-9760-f94e10c0b78b_32bca1f0-d07f-43de-93a4-3f4cb55901e7",
+      "properties": {
+        "api": {
+          "name": "office365",
+          "id": "/subscriptions/34957e2d-ab51-4d0b-8932-7f04baff724f/providers/Microsoft.Web/locations/centralindia/managedApis/office365"
+        }
+      }
+    }
+  }
+}

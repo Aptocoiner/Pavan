@@ -1,0 +1,7 @@
+role Aus_Manager
+	modelPermission: read
+
+	tablePermission 'sales_sample_data xlsx' = [Country] == "Australia"
+
+	annotation PBI_Id = ccd3f9497f6a4a3c95ce4d77f4cbdbdc
+
