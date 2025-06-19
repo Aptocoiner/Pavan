@@ -1,0 +1,164 @@
+table sales_data
+	lineageTag: b76a38e9-bff5-4200-a1d7-d13175b6385e
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 85c215d0-0f3b-4ef4-9bf7-4c9104fd51ae
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e64c22da-fd20-4a98-aea7-b888fffc86c1
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		variation Variation
+			isDefault
+			relationship: 5ebce37c-d7ca-4796-851f-6be5e8bfa7dd
+			defaultHierarchy: LocalDateTable_abdb1aff-5919-4cd4-b5a6-95e43d487752.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ea5e5ab-3d36-4fe9-b10d-a67a024574e2
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: bea4c08b-2502-43a7-b021-a6cad53a1abe
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: 8cf66f2c-bc9f-4cb0-91b7-322ce0827642
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: a26f33da-f4cc-4dec-b8bd-a034c7499c8b
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 501c6888-7a11-4d41-b0bc-0cf0a502f623
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: e3f3fd2b-91b7-4fdc-98fd-504b748952b6
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Subcategory'
+		dataType: string
+		lineageTag: b1ca5683-c95f-41f8-80f2-d43e61149cc0
+		summarizeBy: none
+		sourceColumn: Product Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: 95520cee-9119-4272-bf34-661a0c7b5935
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantity Sold'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bbe3c4e-a573-4d9e-87a1-b2e7a647011f
+		summarizeBy: sum
+		sourceColumn: Quantity Sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price per Unit'
+		dataType: double
+		lineageTag: a8dac9d1-3dbb-409d-a334-0aed3546a42b
+		summarizeBy: sum
+		sourceColumn: Price per Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Discount _%_'
+		dataType: double
+		lineageTag: bc7806cd-955a-4279-8264-c0ca6dd060e2
+		summarizeBy: sum
+		sourceColumn: Discount _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales Amount'
+		dataType: double
+		lineageTag: 65446815-d678-4bdf-9e63-cee2f07290c4
+		summarizeBy: sum
+		sourceColumn: Sales Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 701e7ce4-adc0-4eda-9d46-08378dfdeb03
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Profit Margin _%_'
+		dataType: double
+		lineageTag: 76fdbdfc-00ce-4449-bc32-686fc7a0641c
+		summarizeBy: sum
+		sourceColumn: Profit Margin _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_data = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("a2cuqgr5ukpeppo5hafacatsom-rsoehckle2yefc52b45p5no3ma.datawarehouse.fabric.microsoft.com", "demo_lakehouse"),
+				    dbo_sales_data = Source{[Schema="dbo",Item="sales_data"]}[Data]
+				in
+				    dbo_sales_data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

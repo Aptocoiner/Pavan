@@ -1,0 +1,7 @@
+role NA_Manager
+	modelPermission: read
+
+	tablePermission 'sales_sample_data xlsx' = [Region] == "North America"
+
+	annotation PBI_Id = da18f02280ca498bafc67e2a9839e3e2
+

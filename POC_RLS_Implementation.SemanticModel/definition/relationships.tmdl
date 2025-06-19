@@ -1,0 +1,23 @@
+relationship 91c540e7-d73b-400c-979f-36c5f826319d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'sales_sample_data xlsx'.'Order Date'
+	toColumn: LocalDateTable_1694b8ad-bc2a-42e5-9741-92be3cf4fc09.Date
+
+relationship 5ebce37c-d7ca-4796-851f-6be5e8bfa7dd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: sales_data.'Order Date'
+	toColumn: LocalDateTable_abdb1aff-5919-4cd4-b5a6-95e43d487752.Date
+
+relationship 4671fdd8-e499-45c2-b9a8-beffc05760fd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'sales_sample_data xlsx (2)'.'Order Date'
+	toColumn: LocalDateTable_9c034741-17dd-476a-9778-22ccde9cf3f0.Date
+
+relationship AutoDetected_2b5f2f60-1315-49a5-bff9-dc5953705929
+	fromColumn: sales_data.'Customer ID'
+	toColumn: 'sales_sample_data xlsx'.'Customer ID'
+
+relationship AutoDetected_0baacb81-d969-4374-99e0-023dfb208ecf
+	fromColumn: 'sales_sample_data xlsx (2)'.'Customer ID'
+	toColumn: 'sales_sample_data xlsx'.'Customer ID'
+

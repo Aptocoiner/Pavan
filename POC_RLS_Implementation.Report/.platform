@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "POC_RLS_Implementation"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "71c76923-23e1-9b47-4560-e8eece843f61"
+  }
+}

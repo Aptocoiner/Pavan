@@ -1,0 +1,121 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "data_ingestion_to_lakehouse",
+        "description": "This activity will transform and load the data from lakehouse files to lakehouse table",
+        "type": "RefreshDataflow",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "f8dcc460-e0bf-454d-a773-005f83c5cacc",
+          "workspaceId": "89439c8c-264b-42b0-8bba-0f3afeb5db60",
+          "notifyOption": "NoNotification",
+          "dataflowType": "Dataflow-Gen2"
+        }
+      },
+      {
+        "name": "send_mail_on_success",
+        "description": "This activity will trigger if task execute successfully",
+        "type": "Office365Outlook",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "data_ingestion_to_lakehouse",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "To": "vivekvaidya2000@gmail.com",
+              "Subject": "data pipeline success",
+              "Body": "<p>data pipeline success</p>\n<p>@{activity('data_ingestion_to_lakehouse').output}</p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            }
+          }
+        }
+      },
+      {
+        "name": "Semantic model refresh1",
+        "type": "PBISemanticModelRefresh",
+        "dependsOn": [
+          {
+            "activity": "data_ingestion_to_lakehouse",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "post",
+          "waitOnCompletion": true,
+          "commitMode": "Transactional",
+          "operationType": "SemanticModelRefresh",
+          "groupId": "89439c8c-264b-42b0-8bba-0f3afeb5db60",
+          "datasetId": "79981112-0cec-426b-a69b-d92fcf81d0ce",
+          "objects": [
+            {
+              "table": "sales_sample_data xlsx"
+            }
+          ]
+        },
+        "externalReferences": {
+          "connection": "e94e91cd-c64a-4726-a39f-42efe5b0246d"
+        }
+      },
+      {
+        "name": "Send_mail_on_Fail",
+        "type": "Office365Outlook",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "data_ingestion_to_lakehouse",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "Sensitivity": "",
+              "Importance": "Normal"
+            }
+          }
+        }
+      }
+    ],
+    "logicAppsConnectionPayload": {
+      "id": "/subscriptions/34957e2d-ab51-4d0b-8932-7f04baff724f/resourceGroups/connections-89439c8c-264b-42b0-8bba-0f3afeb5db60/providers/Microsoft.Web/connections/1_c0788930-a2ff-4b50-bcf0-e44e647af6a9_32bca1f0-d07f-43de-93a4-3f4cb55901e7",
+      "properties": {
+        "api": {
+          "name": "office365",
+          "id": "/subscriptions/34957e2d-ab51-4d0b-8932-7f04baff724f/providers/Microsoft.Web/locations/centralindia/managedApis/office365"
+        }
+      }
+    }
+  }
+}

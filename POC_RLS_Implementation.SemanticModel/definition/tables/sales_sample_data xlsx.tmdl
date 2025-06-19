@@ -1,0 +1,186 @@
+table 'sales_sample_data xlsx'
+	lineageTag: 5a8e941f-432c-438a-89d2-4477c1b44222
+
+	measure Total_Sales = sum('sales_sample_data xlsx'[Sales Amount])
+		lineageTag: f3604073-1efb-4d42-bef2-61f9974aeb71
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Total_Qty_SOld = count('sales_sample_data xlsx'[Quantity Sold])
+		formatString: 0
+		lineageTag: cd12dae5-8970-42c8-bf7c-0c9f2cc8657e
+
+	measure Total_Profit = sum('sales_sample_data xlsx'[Profit])
+		lineageTag: 6c9bad4d-b688-431e-af92-ebe6450037a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Profit' = SUM('sales_sample_data xlsx'[Profit])
+		lineageTag: 409428e6-cf65-4d0c-800a-d7a2ab34736b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales' = SUM('sales_sample_data xlsx'[Sales Amount])
+		lineageTag: 2e99e8f4-4146-4d51-bb58-5b3312fd8de4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 5cd45ce3-facd-4c23-b0eb-f375e4076a32
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4c4af368-2421-48c3-91b9-1abc8115c717
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		variation Variation
+			isDefault
+			relationship: 91c540e7-d73b-400c-979f-36c5f826319d
+			defaultHierarchy: LocalDateTable_1694b8ad-bc2a-42e5-9741-92be3cf4fc09.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: a3352eba-42f8-4b9c-b54a-f7d548297201
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 406b37d7-7ef5-4d1f-8cfb-169d3bd6c068
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: 2a351162-2e3f-4147-8c70-17dbd9dbab63
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 3feb1c83-8ecd-4158-a71a-f29aa9b73d0a
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: b88e7b77-a56c-4b83-959a-f119fe2353ee
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: f8d7fd31-5f06-47a0-ad8d-f04107c0951d
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Subcategory'
+		dataType: string
+		lineageTag: b5089cbc-64d9-492b-9068-2f9e2e32f2d3
+		summarizeBy: none
+		sourceColumn: Product Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: ba6c6bc6-bf65-4473-bbc9-f277bd378177
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantity Sold'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a43012c-4a3a-4010-9f99-1746c6b9e08c
+		summarizeBy: sum
+		sourceColumn: Quantity Sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price per Unit'
+		dataType: double
+		lineageTag: 079097a0-1ca1-4c2d-b88a-fa71f2dddd75
+		summarizeBy: sum
+		sourceColumn: Price per Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Discount _%_'
+		dataType: double
+		lineageTag: 6725f356-0e35-4736-a4dd-20e078b7c8d6
+		summarizeBy: sum
+		sourceColumn: Discount _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales Amount'
+		dataType: double
+		lineageTag: ac9d9266-ce81-4a8f-acd4-06f2df9eb6bf
+		summarizeBy: sum
+		sourceColumn: Sales Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 1e089c0b-df5b-468e-bca7-58756eaf124b
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Profit Margin _%_'
+		dataType: double
+		lineageTag: cb081efb-cd66-4b4e-9bf6-4f2ef8f134f0
+		summarizeBy: sum
+		sourceColumn: Profit Margin _%_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'sales_sample_data xlsx' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("a2cuqgr5ukpeppo5hafacatsom-rsoehckle2yefc52b45p5no3ma.datawarehouse.fabric.microsoft.com", "source_layer_lakehouse"),
+				    #"dbo_sales_sample_data xlsx" = Source{[Schema="dbo",Item="sales_sample_data xlsx"]}[Data]
+				in
+				    #"dbo_sales_sample_data xlsx"
+
+	annotation PBI_ResultType = Table
+

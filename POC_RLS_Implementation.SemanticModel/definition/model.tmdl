@@ -1,0 +1,32 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["sales_sample_data xlsx","sales_data","sales_sample_data xlsx (2)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+ref table 'sales_sample_data xlsx'
+ref table DateTableTemplate_d383b3fb-9c38-4cb9-ba86-bd6fbf709034
+ref table LocalDateTable_1694b8ad-bc2a-42e5-9741-92be3cf4fc09
+ref table sales_data
+ref table LocalDateTable_abdb1aff-5919-4cd4-b5a6-95e43d487752
+ref table 'sales_sample_data xlsx (2)'
+ref table LocalDateTable_9c034741-17dd-476a-9778-22ccde9cf3f0
+
+ref role Aus_Manager
+ref role Can_Manager
+ref role Ind_Manager
+ref role USA_Manager
+ref role IND_Mgr
+ref role NA_Manager
+ref role OCE_Manager
+
+ref cultureInfo en-US
+
